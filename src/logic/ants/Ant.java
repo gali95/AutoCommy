@@ -10,17 +10,20 @@ import java.util.Random;
 import javax.imageio.ImageIO;
 
 import logic.ants.ScentMark.Direction;
+import logic.base.classes.ACOTimer;
 import logic.base.defaultImpl.ACObjectImpl;
 import logic.base.interfaces.SquareMesh;
 
 public class Ant extends ACObjectImpl{
 
-	private Image img;
+	protected Image img;
 	private ScentMark standardScent;
 	private AntFoodSystem stomach;
 	private int goHome;
 	private double goHomeMax,goHomeMaxInc;
 	private Direction prevDir;
+	private double moveSpeed = 1;
+	private double timeToMove;
 	
 	public Ant()
 	{
@@ -37,6 +40,8 @@ public class Ant extends ACObjectImpl{
 		goHomeMaxInc = 0.2;
 		goHome = (int)goHomeMax;
 		prevDir = null;
+		getDrawable().setDrawOrder(100);
+		timeToMove = moveSpeed;
 	}
 	
 	@Override
@@ -96,21 +101,21 @@ public class Ant extends ACObjectImpl{
 	
 	@Override
 	public void NextTurn(SquareMesh currentMap) {
-		
-		InHomeRoutine(currentMap);
-		
-		if(goHome <= 0)
-		{
-			GoToHome(currentMap,false);
+
+		if(timeToMove < 0) {
+
+			InHomeRoutine(currentMap);
+			if (goHome <= 0) {
+				GoToHome(currentMap, false);
+			} else {
+				Scout(currentMap);
+			}
+			//Move(currentMap,Direction.NORTH);
+			goHome -= 1;
+			timeToMove = moveSpeed;
 		}
-		else
-		{
-			Scout(currentMap);
-		}
-		
-		//Move(currentMap,Direction.NORTH);
-		goHome -= 1;
-		
+		timeToMove -= ACOTimer.getDeltaNextTurnTime();
+
 	}
 
 	public void InHomeRoutine(SquareMesh currentMap)

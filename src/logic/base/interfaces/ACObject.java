@@ -1,5 +1,7 @@
 package logic.base.interfaces;
 
+import logic.base.classes.Drawable;
+
 import java.awt.Image;
 
 public interface ACObject {
@@ -9,5 +11,6 @@ public interface ACObject {
 	public void NextTurn(SquareMesh currentMap);
 	public int[] getPosition();
 	public void setPosition(int[] pos);
+	public Drawable getDrawable();
 	
 }

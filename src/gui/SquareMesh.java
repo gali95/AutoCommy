@@ -1,15 +1,12 @@
 package gui;
 
-import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.LayoutManager;
-
-import javax.swing.JPanel;
-
 import logic.base.defaultImpl.SquareMeshImpl;
 import logic.base.defaultImpl.test.FakeACObject;
 
-public class SquareMesh extends JPanel{
+import javax.swing.*;
+import java.awt.*;
+
+public class SquareMesh extends JPanel {
 
 	private int numRows,numColumns;
 	private int squareWidth,squareHeight;

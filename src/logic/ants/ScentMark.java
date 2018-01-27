@@ -8,6 +8,7 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+import logic.base.classes.Drawable;
 import logic.base.defaultImpl.ACObjectImpl;
 import logic.base.interfaces.ACObject;
 import logic.base.interfaces.Square;
@@ -75,6 +76,8 @@ public class ScentMark extends ACObjectImpl {
 		this.strenghtToMaxDraw = other.strenghtToMaxDraw;
 		this.arrowCol = other.arrowCol;
 		graph = new BufferedImage(100, 100, BufferedImage.TYPE_4BYTE_ABGR_PRE);
+		getDrawable().setDrawOrder(20);
+		getDrawable().setInteractionType(Drawable.DrawableType.UNDRAWABLE);
 	}
 	
 	private String tag;
@@ -121,6 +124,8 @@ public class ScentMark extends ACObjectImpl {
 		this.arrowCol = arrowCol;
 		
 		graph = new BufferedImage(100, 100, BufferedImage.TYPE_4BYTE_ABGR_PRE);
+		getDrawable().setDrawOrder(20);
+		getDrawable().setInteractionType(Drawable.DrawableType.UNDRAWABLE);
 	}
 	
 	@Override

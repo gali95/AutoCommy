@@ -2,10 +2,11 @@ package logic.server;
 
 import javax.swing.JPanel;
 
+import logic.base.classes.ACOTimer;
 import logic.base.interfaces.SquareMesh;
+import logic.graKsawerego.GraMesh;
 import logic.server.test.StubLogic;
 import stoper.Stoper;
-import gui.*;
 
 public class Server implements Runnable{
 
@@ -62,7 +63,14 @@ public class Server implements Runnable{
 	public ServerState getState() {
 		return state;
 	}
-	
+
+	public void passKeyboardCode(int code)
+	{
+		if(getMesh() == null) return;
+		GraMesh t = (GraMesh)mesh;
+		t.setPressedKeyCode(code);
+	}
+
 	public boolean StartServer()
 	{
 		
@@ -106,6 +114,7 @@ public class Server implements Runnable{
 			}
 			Stoper.Start("NextTurn");
 			pre = System.nanoTime();
+			ACOTimer.setDeltaNextTurnTime(roundTime-remainingRoundTime);
 			mesh.NextTurn();
 			Stoper.Stop("NextTurn");
 			if(toRefresh != null)

@@ -2,6 +2,7 @@ package logic.base.defaultImpl;
 
 import java.util.ArrayList;
 
+import logic.base.classes.Drawable;
 import logic.base.interfaces.ACObject;
 import logic.base.interfaces.Square;
 
@@ -79,7 +80,7 @@ public class SquareImpl implements Square{
 		ArrayList<ACObject> returnArr = new ArrayList<ACObject>();
 		for(ACObject obj:content)
 		{
-			if(obj.GetImage() != null) returnArr.add(obj);
+			if(obj.getDrawable().getInteractionType() != Drawable.DrawableType.UNDRAWABLE && obj.GetImage() != null) returnArr.add(obj);
 		}
 		return returnArr;
 	}
